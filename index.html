@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock paper scissors</title>
 </head>
 <body>
     <script>
@@ -18,24 +18,53 @@
                 return ("scissors");
             }
         }
+
+        let tie = ("It's a tie!");
+        let loss = ("You lose!");
+        let win = ("You win!");
+        let playerScore = 0;
+        let computerScore = 0;
+        //Declaring these here so I can use them 
+        //in the game function
      
 
         function playRound () {
             let playerSelection = prompt("Rock, paper or scissors?");
             let toLowerCasePlayerSelection = playerSelection.toLowerCase();
             let computerSelection = computerPlay()
-            if (toLowerCasePlayerSelection === "rock" && computerSelection === "rock") {
-                return ("It's a tie! The computer chose rock!");
-            } else if (toLowerCasePlayerSelection === "rock" && computerSelection === "paper") {
-                return ("You lose! The computer chose paper!");
-            } else if (toLowerCasePlayerSelection === "rock" && computerSelection === "scissors") {
-                return ("You win! The computer chose scissors!");
+
+            if (toLowerCasePlayerSelection === "rock" && computerSelection === "scissors"
+            || toLowerCasePlayerSelection === "paper" && computerSelection === "rock" ||
+            toLowerCasePlayerSelection === "scissors" && computerSelection === "paper") {
+                playerScore++;
+                return win;
+
+            } else if (toLowerCasePlayerSelection === "rock" && computerSelection === "paper"
+            || toLowerCasePlayerSelection === "paper" && computerSelection === "scissors" ||
+            toLowerCasePlayerSelection === "scissors" && computerSelection === "rock") {
+                computerScore++;
+                return loss;
+
+            } else if (toLowerCasePlayerSelection === "rock" && computerSelection === "rock"
+            || toLowerCasePlayerSelection === "paper" && computerSelection === "paper" ||
+            toLowerCasePlayerSelection === "scissors" && computerSelection === "scissors") {
+                return tie;
             }
         }
-
     
+        function game() {
+            for (let i = 0; i < 5; i++) {
+                playRound();
+            } if (computerScore > playerScore) {
+                return ("You lost the game!");
+            } else if (playerScore > computerScore) {
+                return ("You won the game!");
+            } else if (computerScore === playerScore) {
+                alert ("IT'S A TIE");
+            }
 
-        
-    </script>
-</body>
+        }
+
+        </script>
+    </body>
 </html>
