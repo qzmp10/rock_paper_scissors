@@ -15,19 +15,23 @@
       <button class="paper">I CHOOSE PAPER!</button>
       <button class="scissors">I CHOOSE SCISSORS!</button>
     </div>
-    <p class="result">Result of the game.</p>
+    <p class="result"> Result of the game</p>
+    <p class="score">Score</p>
+    <button class="reset">Reset Scores</button>
     <img src="../rock_paper_scissors/backgroundLogan.jpg" id="logan">
+
   </div>
   
   <script>
         let image = document.querySelector('#logan');
 
-
         let rockBtn = document.querySelector('.rock');
         let paperBtn = document.querySelector('.paper');
         let scissorsBtn = document.querySelector('.scissors');
+        let resetBtn = document.querySelector('.reset');
 
         let resultOfGame = document.querySelector('.result');
+        let scoreOfGame = document.querySelector('.score');
 
         let rockTie = ("It's a tie! Logan chose rock.");
         let rockLoss = ("You lose! Logan chose paper.");
@@ -61,21 +65,40 @@
             }
         }
 
+        
+
         let rockRound = function() {
             playerSelection = 'rock'
             computerSelection = computerPlay();
 
             if (playerSelection === 'rock' && computerSelection === 'rock') {
                 resultOfGame.textContent = rockTie;
+                scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganTie.jpg";
+
             } else if (playerSelection === 'rock' && computerSelection === 'paper') {
                 computerScore++;
                 resultOfGame.textContent = rockLoss;
+                scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganL.jpg";
+
             } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
                 playerScore++;
                 resultOfGame.textContent = rockWin;
+                scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganWin.jpg";
+            }
+
+            // Button color change for if you're winning, losing, or tie 
+            if (playerScore > computerScore) {
+            scoreOfGame.setAttribute('style', 'background: green');
+
+            } else if (computerScore > playerScore) {
+            scoreOfGame.setAttribute('style', 'background: red');
+
+            } else {
+            scoreOfGame.setAttribute('style', 'background: black');
+            
             }
         }
 
@@ -86,14 +109,31 @@
             if (playerSelection === 'paper' && computerSelection === 'rock') {
                 playerScore++;
                 resultOfGame.textContent = paperWin;
+                scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganWin.jpg";
+
             } else if (playerSelection === 'paper' && computerSelection === 'paper') {
                 resultOfGame.textContent = paperTie;
+                scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganTie.jpg";
+
             } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
                 computerScore++;
                 resultOfGame.textContent = paperLoss;
+                scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganL.jpg";
+            }
+
+            // Button color change for if you're winning, losing, or tie 
+            if (playerScore > computerScore) {
+            scoreOfGame.setAttribute('style', 'background: green');
+
+            } else if (computerScore > playerScore) {
+            scoreOfGame.setAttribute('style', 'background: red');
+
+            } else {
+            scoreOfGame.setAttribute('style', 'background: black');
+            
             }
         }
 
@@ -104,21 +144,42 @@
             if (playerSelection === 'scissors' && computerSelection === 'rock') {
                 computerScore++;
                 resultOfGame.textContent = scissorsLoss;
+                scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganL.jpg";
+                
             } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
                 playerScore++;
                 resultOfGame.textContent = scissorsWin;
+                scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganWin.jpg";
             } else if (playerSelection === 'scissors' && computerSelection === 'scissors') {
                 resultOfGame.textContent = scissorsTie;
+                scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganTie.jpg";
+            } 
+
+            // Button color change for if you're winning, losing, or tie 
+            if (playerScore > computerScore) {
+            scoreOfGame.setAttribute('style', 'background: green');
+
+            } else if (computerScore > playerScore) {
+            scoreOfGame.setAttribute('style', 'background: red');
+
+            } else {
+            scoreOfGame.setAttribute('style', 'background: black');
+
             }
         }
 
         rockBtn.addEventListener('click', () => rockRound());
         paperBtn.addEventListener('click', () => paperRound());
         scissorsBtn.addEventListener('click', () => scissorsRound());
-
+        resetBtn.addEventListener('click', () => {
+            playerScore = 0;
+            computerScore = 0;
+            scoreOfGame.textContent = playerScore +" - "+ computerScore;
+            scoreOfGame.setAttribute('style', 'background: black');
+        });
         </script>
 
     </body>
