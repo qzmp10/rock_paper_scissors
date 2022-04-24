@@ -4,9 +4,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock! Paper! Scissors!</title>
+    <title>Rock paper scissors</title>
 </head>
 <body>
+    <script>
+        function computerPlay() {
+            const randomNumber = Math.round(Math.random() * 100);
+            if (randomNumber <= 33) {
+                return ("rock");
+            } else if (randomNumber > 33 && randomNumber <= 66) {
+                return ("paper");
+            } else if (randomNumber > 66 && randomNumber <= 100) {
+                return ("scissors");
+            }
+        }
+
+        let tie = ("It's a tie!");
+        let loss = ("You lose!");
+        let win = ("You win!");
+        let playerScore = 0;
+        let computerScore = 0;
+        //Declaring these here so I can use them 
+        //in the game function
+     
+
+        function playRound () {
+            let playerSelection = prompt("Rock, paper or scissors?");
+            let toLowerCasePlayerSelection = playerSelection.toLowerCase();
+            let computerSelection = computerPlay()
+
+            if (toLowerCasePlayerSelection === "rock" && computerSelection === "scissors"
+            || toLowerCasePlayerSelection === "paper" && computerSelection === "rock" ||
+            toLowerCasePlayerSelection === "scissors" && computerSelection === "paper") {
+                playerScore++;
+                return win;
+
+            } else if (toLowerCasePlayerSelection === "rock" && computerSelection === "paper"
+            || toLowerCasePlayerSelection === "paper" && computerSelection === "scissors" ||
+            toLowerCasePlayerSelection === "scissors" && computerSelection === "rock") {
+                computerScore++;
+                return loss;
+
+            } else if (toLowerCasePlayerSelection === "rock" && computerSelection === "rock"
+            || toLowerCasePlayerSelection === "paper" && computerSelection === "paper" ||
+            toLowerCasePlayerSelection === "scissors" && computerSelection === "scissors") {
+                return tie;
+            }
+        }
     
-</body>
+        function game() {
+            for (let i = 0; i < 5; i++) {
+                playRound();
+            } if (computerScore > playerScore) {
+                return ("You lost the game!");
+            } else if (playerScore > computerScore) {
+                return ("You won the game!");
+            } else if (computerScore === playerScore) {
+                alert ("IT'S A TIE");
+            }
+        }
+
+        let resetScores = function() {
+            computerScore = 0;
+            playerScore = 0;
+        }
+
+        </script>
+    </body>
 </html>
