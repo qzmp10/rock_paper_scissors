@@ -20,10 +20,18 @@
     <button class="reset">Reset Scores</button>
     <img src="../rock_paper_scissors/backgroundLogan.jpg" id="logan">
 
+    <audio id="win" src="../rock_paper_scissors/iWin.m4a"></audio>
+    <audio id="loss" src="../rock_paper_scissors/Nouvel enregistrement 10.m4a"></audio>
+    <audio id="tie" src="../rock_paper_scissors/Nouvel enregistrement 9.m4a"></audio>
+
   </div>
   
   <script>
         let image = document.querySelector('#logan');
+
+        let audioWin = document.querySelector('#win');
+        let audioLoss = document.querySelector('#loss');
+        let audioTie = document.querySelector('#tie');
 
         let rockBtn = document.querySelector('.rock');
         let paperBtn = document.querySelector('.paper');
@@ -75,18 +83,24 @@
                 resultOfGame.textContent = rockTie;
                 scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganTie.jpg";
+                audioTie.currentTime = 0.5;
+                audioTie.play();
 
             } else if (playerSelection === 'rock' && computerSelection === 'paper') {
                 computerScore++;
                 resultOfGame.textContent = rockLoss;
                 scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganL.jpg";
+                audioWin.currentTime = 0.5;
+                audioWin.play();
 
             } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
                 playerScore++;
                 resultOfGame.textContent = rockWin;
                 scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganWin.jpg";
+                audioLoss.currentTime = 0.5;
+                audioLoss.play();
             }
 
             // Button color change for if you're winning, losing, or tie 
@@ -111,17 +125,23 @@
                 resultOfGame.textContent = paperWin;
                 scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganWin.jpg";
+                audioLoss.currentTime = 0.5;
+                audioLoss.play();
 
             } else if (playerSelection === 'paper' && computerSelection === 'paper') {
                 resultOfGame.textContent = paperTie;
                 scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganTie.jpg";
+                audioTie.currentTime = 0.5;
+                audioTie.play();
 
             } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
                 computerScore++;
                 resultOfGame.textContent = paperLoss;
                 scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganL.jpg";
+                audioWin.currentTime = 0.5;
+                audioWin.play();
             }
 
             // Button color change for if you're winning, losing, or tie 
@@ -146,16 +166,23 @@
                 resultOfGame.textContent = scissorsLoss;
                 scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganL.jpg";
+                audioWin.currentTime = 0.5;
+                audioWin.play();
                 
             } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
                 playerScore++;
                 resultOfGame.textContent = scissorsWin;
                 scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganWin.jpg";
+                audioLoss.currentTime = 0.5;
+                audioLoss.play();
+
             } else if (playerSelection === 'scissors' && computerSelection === 'scissors') {
                 resultOfGame.textContent = scissorsTie;
                 scoreOfGame.textContent = playerScore +" - "+ computerScore;
                 document.getElementById("logan").src="../rock_paper_scissors/loganTie.jpg";
+                audioTie.currentTime = 0.5;
+                audioTie.play();
             } 
 
             // Button color change for if you're winning, losing, or tie 
