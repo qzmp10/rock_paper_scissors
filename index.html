@@ -4,10 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock paper scissors</title>
+    <title>Rock, paper...scissors!</title>
+    <link rel="stylesheet" href="../rock_paper_scissors/style.css">
+    
 </head>
 <body>
-    <script>
+  <div id="page">
+    <div class="buttons">
+      <button class="rock">I CHOOSE ROCK!</button>
+      <button class="paper">I CHOOSE PAPER!</button>
+      <button class="scissors">I CHOOSE SCISSORS!</button>
+    </div>
+    <p class="result">Result of the game.</p>
+    <img src="../rock_paper_scissors/backgroundLogan.jpg" id="logan">
+  </div>
+  
+  <script>
+        let image = document.querySelector('#logan');
+
+
+        let rockBtn = document.querySelector('.rock');
+        let paperBtn = document.querySelector('.paper');
+        let scissorsBtn = document.querySelector('.scissors');
+
+        let resultOfGame = document.querySelector('.result');
+
+        let rockTie = ("It's a tie! Logan chose rock.");
+        let rockLoss = ("You lose! Logan chose paper.");
+        let rockWin = ("You win! Logan chose scissors.");
+
+        let paperTie = ("It's a tie! Logan chose paper.");
+        let paperLoss = ("You lose! Logan chose scissors.");
+        let paperWin = ("You win! Logan chose rock.");
+
+        let scissorsTie = ("It's a tie! Logan chose scissors.");
+        let scissorsLoss = ("You lose! Logan chose rock.");
+        let scissorsWin = ("You win! Logan chose paper.");
+
+        let playerScore = 0;
+        let computerScore = 0;
+
+        let playerSelection;
+        let computerSelection;
+        
+        //Declaring these here so I can use them 
+        //in the game function
+
         function computerPlay() {
             const randomNumber = Math.round(Math.random() * 100);
             if (randomNumber <= 33) {
@@ -19,56 +61,65 @@
             }
         }
 
-        let tie = ("It's a tie!");
-        let loss = ("You lose!");
-        let win = ("You win!");
-        let playerScore = 0;
-        let computerScore = 0;
-        //Declaring these here so I can use them 
-        //in the game function
-     
+        let rockRound = function() {
+            playerSelection = 'rock'
+            computerSelection = computerPlay();
 
-        function playRound () {
-            let playerSelection = prompt("Rock, paper or scissors?");
-            let toLowerCasePlayerSelection = playerSelection.toLowerCase();
-            let computerSelection = computerPlay()
-
-            if (toLowerCasePlayerSelection === "rock" && computerSelection === "scissors"
-            || toLowerCasePlayerSelection === "paper" && computerSelection === "rock" ||
-            toLowerCasePlayerSelection === "scissors" && computerSelection === "paper") {
-                playerScore++;
-                return win;
-
-            } else if (toLowerCasePlayerSelection === "rock" && computerSelection === "paper"
-            || toLowerCasePlayerSelection === "paper" && computerSelection === "scissors" ||
-            toLowerCasePlayerSelection === "scissors" && computerSelection === "rock") {
+            if (playerSelection === 'rock' && computerSelection === 'rock') {
+                resultOfGame.textContent = rockTie;
+                document.getElementById("logan").src="../rock_paper_scissors/loganTie.jpg";
+            } else if (playerSelection === 'rock' && computerSelection === 'paper') {
                 computerScore++;
-                return loss;
-
-            } else if (toLowerCasePlayerSelection === "rock" && computerSelection === "rock"
-            || toLowerCasePlayerSelection === "paper" && computerSelection === "paper" ||
-            toLowerCasePlayerSelection === "scissors" && computerSelection === "scissors") {
-                return tie;
-            }
-        }
-    
-        function game() {
-            for (let i = 0; i < 5; i++) {
-                playRound();
-            } if (computerScore > playerScore) {
-                return ("You lost the game!");
-            } else if (playerScore > computerScore) {
-                return ("You won the game!");
-            } else if (computerScore === playerScore) {
-                alert ("IT'S A TIE");
+                resultOfGame.textContent = rockLoss;
+                document.getElementById("logan").src="../rock_paper_scissors/loganL.jpg";
+            } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+                playerScore++;
+                resultOfGame.textContent = rockWin;
+                document.getElementById("logan").src="../rock_paper_scissors/loganWin.jpg";
             }
         }
 
-        let resetScores = function() {
-            computerScore = 0;
-            playerScore = 0;
+        let paperRound = function() {
+            playerSelection = 'paper'
+            computerSelection = computerPlay();
+
+            if (playerSelection === 'paper' && computerSelection === 'rock') {
+                playerScore++;
+                resultOfGame.textContent = paperWin;
+                document.getElementById("logan").src="../rock_paper_scissors/loganWin.jpg";
+            } else if (playerSelection === 'paper' && computerSelection === 'paper') {
+                resultOfGame.textContent = paperTie;
+                document.getElementById("logan").src="../rock_paper_scissors/loganTie.jpg";
+            } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+                computerScore++;
+                resultOfGame.textContent = paperLoss;
+                document.getElementById("logan").src="../rock_paper_scissors/loganL.jpg";
+            }
         }
+
+        let scissorsRound = function() {
+            playerSelection = 'scissors'
+            computerSelection = computerPlay();
+
+            if (playerSelection === 'scissors' && computerSelection === 'rock') {
+                computerScore++;
+                resultOfGame.textContent = scissorsLoss;
+                document.getElementById("logan").src="../rock_paper_scissors/loganL.jpg";
+            } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+                playerScore++;
+                resultOfGame.textContent = scissorsWin;
+                document.getElementById("logan").src="../rock_paper_scissors/loganWin.jpg";
+            } else if (playerSelection === 'scissors' && computerSelection === 'scissors') {
+                resultOfGame.textContent = scissorsTie;
+                document.getElementById("logan").src="../rock_paper_scissors/loganTie.jpg";
+            }
+        }
+
+        rockBtn.addEventListener('click', () => rockRound());
+        paperBtn.addEventListener('click', () => paperRound());
+        scissorsBtn.addEventListener('click', () => scissorsRound());
 
         </script>
+
     </body>
 </html>
